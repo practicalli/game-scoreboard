@@ -1,14 +1,17 @@
 (ns game-scoreboard.handler
   (:require [compojure.api.sweet :refer :all]
             [ring.util.http-response :refer :all]
-            [schema.core :as s]))
+            [schema.core :as schema]))
 
-(s/defschema Pizza
-  {:name s/Str
-   (s/optional-key :description) s/Str
-   :size (s/enum :L :M :S)
-   :origin {:country (s/enum :FI :PO)
-            :city s/Str}})
+(schema/defschema Pizza
+  {:name   schema/Str
+   :size   (schema/enum :L :M :S)
+   :origin {:country (schema/enum :FI :PO)
+            :city    schema/Str}
+
+   (schema/optional-key
+     :description) schema/Str
+   })
 
 (def app
   (api
