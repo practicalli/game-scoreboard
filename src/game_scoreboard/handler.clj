@@ -36,6 +36,18 @@
     [Score])
 
 
+(schema/defschema PlayerAccount
+  {:player-id schema/Uuid
+   :name      schema/Str})
+
+(schema/defschema AllPlayerAccounts
+  [{:player-id schema/Uuid
+    :name      schema/Str}])
+
+
+(schema/defschema NewPlayer
+  {:name schema/Str})
+
 
 ;; Game data
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -47,6 +59,9 @@
      {:player "peaches"
       :score  47}]))
 
+(def player-accounts
+  (atom
+    []))
 
 ;; Helper Functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -61,6 +76,14 @@
 (defn random-score []
   {:player (random-player-id)
    :score  (rand-int 100000000)})
+
+(defn random-uuid []
+  (java.util.UUID/randomUUID))
+
+
+(defn new-player-account [name]
+  {:player-id (random-uuid)
+   :name      name})
 
 
 ;; API app
@@ -91,6 +114,16 @@
                    :summary "Stores a score in the game board"
                    (ok {:status true}))
 
+             (POST "/new-player" []
+                   :return PlayerAccount
+                   :body [new-player NewPlayer]
+                   :summary "Create a new player account"
+                   (ok (swap! player-accounts conj (new-player-account (new-player :name)))))
+
+             (GET "/player-accounts" []
+                  :return AllPlayerAccounts
+                  :summary "Returns all the current player accounts"
+                  (ok @player-accounts))
 
              (GET "/random-score" []
                   :return ScoreBoard
@@ -145,3 +178,7 @@
 #_(swap! score-board conj {:player "DNA" :score 42})
 
 #_(swap! score-board conj {:player "RonnyPonny" :score 999999})
+
+
+(swap! player-accounts conj {:player-id   (random-uuid)
+                             :player-name (random-player-id)})
