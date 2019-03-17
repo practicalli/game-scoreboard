@@ -61,6 +61,11 @@
     (context "/game" []
              :tags ["game"]
 
+             (GET "/scoreboard" []
+                  :return ScoreBoard
+                  :summary "The scores of the current scoreboard"
+                  (ok @score-board))
+
              (POST "/new-score" []
                    :return ScoreSaved
                    :body [score Score]
@@ -95,3 +100,21 @@
         :summary "echoes a Pizza"
         (ok pizza))
 
+;; REPL design journal
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; What values are in the score board?
+@score-board
+
+(deref score-board)
+
+
+;; Add a specific score to the score-board
+
+#_(swap! score-board conj {:player "REPL" :score 101010101})
+
+#_(swap! score-board conj {:player "Richy" :score 12345})
+
+#_(swap! score-board conj {:player "DNA" :score 42})
+
+#_(swap! score-board conj {:player "RonnyPonny" :score 999999})
