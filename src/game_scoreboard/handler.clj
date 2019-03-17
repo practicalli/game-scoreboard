@@ -20,6 +20,11 @@
    (schema/optional-key
      :gravitar) schema/Str})
 
+;; A schema for the result of saving a score to the game scoreboard
+
+(schema/defschema ScoreSaved
+  {:status schema/Bool})
+
 (def app
   (api
     {:swagger
