@@ -7,8 +7,18 @@
 
 ;; s/Any, s/Bool, s/Num, s/Keyword, s/Symbol, s/Int, and s/Str are cross-platform schemas.
 
+;; Game scoreboard schemas
+;;;;;;;;;;;;;
+
+;; Define a schema for a specific score in a game
+
+(schema/defschema Score
+  {:player-id   schema/Uuid
+   :player-name schema/Str
+   :score       schema/Int
 
    (schema/optional-key
+     :gravitar) schema/Str})
 
 (def app
   (api
