@@ -25,6 +25,28 @@
 (schema/defschema ScoreSaved
   {:status schema/Bool})
 
+
+;; Design of the Scoreboard
+(schema/defschema ScoreBoard
+  [{:player schema/Str
+    :score  schema/Int}])
+
+;; Define a schema using a defined schema - to investigate
+#_(schema/defschema ScoreBoard
+    [Score])
+
+
+
+;; Game data
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(def score-board
+  (atom
+    [{:player "waffles"
+      :score  1000001}
+     {:player "peaches"
+      :score  47}]))
+
 (def app
   (api
     {:swagger
