@@ -3,6 +3,10 @@
             [ring.util.http-response :refer :all]
             [schema.core :as schema]))
 
+;; Schema types
+
+;; s/Any, s/Bool, s/Num, s/Keyword, s/Symbol, s/Int, and s/Str are cross-platform schemas.
+
 
    (schema/optional-key
 
