@@ -47,6 +47,25 @@
      {:player "peaches"
       :score  47}]))
 
+
+;; Helper Functions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; generate random account names
+
+(defn random-player-id
+  []
+  (str "player" (rand-int 1000)))
+
+;; generate random score
+(defn random-score []
+  {:player (random-player-id)
+   :score  (rand-int 100000000)})
+
+
+;; API app
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (def app
   (api
     {:swagger
@@ -71,6 +90,14 @@
                    :body [score Score]
                    :summary "Stores a score in the game board"
                    (ok {:status true}))
+
+
+             (GET "/random-score" []
+                  :return ScoreBoard
+                  :summary "Generates a random score, adds it to the game board and returns the new game board"
+                  (ok (swap! score-board conj (random-score))))
+             )))
+
 
 ;; data model that came with the compojure-api template
 ;;;;;;;;;;;;;
