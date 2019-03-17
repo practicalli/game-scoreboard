@@ -39,6 +39,12 @@
     (context "/game" []
              :tags ["game"]
 
+             (POST "/new-score" []
+                   :return ScoreSaved
+                   :body [score Score]
+                   :summary "Stores a score in the game board"
+                   (ok {:status true}))
+
 ;; data model that came with the compojure-api template
 ;;;;;;;;;;;;;
 
