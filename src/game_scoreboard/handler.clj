@@ -25,8 +25,8 @@
 
 ;; Design of the Scoreboard
 (schema/defschema ScoreBoard
-  [{:player schema/Str
-    :score  schema/Int}])
+  [{:player-id schema/Uuid
+    :score     schema/Int}])
 
 ;; Define a schema using a defined schema - to investigate
 #_(schema/defschema ScoreBoard
