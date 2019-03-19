@@ -55,21 +55,6 @@
    (schema/optional-key
      :player-gravitar) schema/Str})
 
-
-;; Game data
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(def score-board
-  (atom
-    [{:player-id (random-uuid)
-      :score     1000001}
-     {:player-id (random-uuid)
-      :score     47}]))
-
-(def player-accounts
-  (atom
-    []))
-
 ;; Helper Functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -91,6 +76,21 @@
 (defn new-player-account [name]
   {:player-id (random-uuid)
    :name      name})
+
+
+;; Game data
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(def score-board
+  (atom
+    [{:player-id (random-uuid)
+      :score     1000001}
+     {:player-id (random-uuid)
+      :score     47}]))
+
+(def player-accounts
+  (atom
+    []))
 
 
 ;; API app
