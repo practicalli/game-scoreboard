@@ -13,12 +13,9 @@
 ;; Define a schema for a specific score in a game
 
 (schema/defschema Score
-  {:player-id   schema/Uuid
-   :player-name schema/Str
-   :score       schema/Int
+  {:player-id schema/Uuid
+   :score     schema/Int})
 
-   (schema/optional-key
-     :gravitar) schema/Str})
 
 ;; A schema for the result of saving a score to the game scoreboard
 
@@ -37,16 +34,26 @@
 
 
 (schema/defschema PlayerAccount
-  {:player-id schema/Uuid
-   :name      schema/Str})
+  {:player-id   schema/Uuid
+   :player-name schema/Str
+
+   (schema/optional-key
+     :player-gravitar) schema/Str})
+
 
 (schema/defschema AllPlayerAccounts
-  [{:player-id schema/Uuid
-    :name      schema/Str}])
+  [{:player-id   schema/Uuid
+    :player-name schema/Str
+
+    (schema/optional-key
+      :player-gravitar) schema/Str}])
 
 
 (schema/defschema NewPlayer
-  {:name schema/Str})
+  {:name schema/Str
+
+   (schema/optional-key
+     :player-gravitar) schema/Str})
 
 
 ;; Game data
