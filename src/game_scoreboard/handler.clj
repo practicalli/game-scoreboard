@@ -11,14 +11,12 @@
 ;;;;;;;;;;;;;
 
 ;; Define a schema for a specific score in a game
-
 (schema/defschema Score
   {:player-id schema/Uuid
    :score     schema/Int})
 
 
 ;; A schema for the result of saving a score to the game scoreboard
-
 (schema/defschema ScoreSaved
   {:status schema/Bool})
 
@@ -199,3 +197,8 @@
 
 (swap! player-accounts conj {:player-id   (random-uuid)
                              :player-name (random-player-id)})
+
+
+;; Creating a new player-accounts
+
+#_(new-player-account "fred")
