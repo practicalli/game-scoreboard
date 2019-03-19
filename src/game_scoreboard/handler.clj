@@ -55,42 +55,51 @@
    (schema/optional-key
      :player-gravitar) schema/Str})
 
+;; Game data
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Example Game data
+#_{:player-id #uuid "131e3861-501a-4d19-b740-56c260cacdf8"
+   :score     1000001}
+
+(def score-board
+  (atom
+    []))
+
+(def player-accounts
+  (atom
+    []))
+
+
 ;; Helper Functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; generate random account names
+(defn random-uuid []
+  (java.util.UUID/randomUUID))
+
 
 (defn random-player-id
   []
   (str "player" (rand-int 1000)))
 
+
 ;; generate random score
 (defn random-score []
-  {:player (random-player-id)
-   :score  (rand-int 100000000)})
-
-(defn random-uuid []
-  (java.util.UUID/randomUUID))
-
-
-(defn new-player-account [name]
   {:player-id (random-uuid)
-   :name      name})
+   :score     (rand-int 100000000)})
 
 
-;; Game data
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn new-player-account
+  "Create new player account using a given player name, saving the new account to the player account collection.
 
-(def score-board
-  (atom
-    [{:player-id (random-uuid)
-      :score     1000001}
-     {:player-id (random-uuid)
-      :score     47}]))
+  Returns the new player account."
+  [name]
+  (let [new-account {:player-id   (random-uuid)
+                     :player-name name}]
+    (swap! player-accounts conj new-account)
+    new-account))
 
-(def player-accounts
-  (atom
-    []))
 
 
 ;; API app
