@@ -134,7 +134,8 @@
                    :return PlayerAccount
                    :body [new-player NewPlayer]
                    :summary "Create a new player account"
-                   (ok (swap! player-accounts conj (new-player-account (new-player :name)))))
+                   (ok (new-player-account (new-player :name))
+                       ))
 
              (GET "/player-accounts" []
                   :return AllPlayerAccounts
