@@ -61,10 +61,10 @@
 
 (def score-board
   (atom
-    [{:player "waffles"
-      :score  1000001}
-     {:player "peaches"
-      :score  47}]))
+    [{:player-id (random-uuid)
+      :score     1000001}
+     {:player-id (random-uuid)
+      :score     47}]))
 
 (def player-accounts
   (atom
