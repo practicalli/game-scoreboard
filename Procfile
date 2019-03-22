@@ -1,1 +1,1 @@
-web: java $JVM_OPTS -cp target/server.jar clojure.main -m game-scoreboard.handler $PORT
+web: lein ring server-headless $PORT
