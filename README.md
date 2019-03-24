@@ -31,6 +31,27 @@ java -jar target/server.jar
 
 `lein ring uberwar`
 
+
+
+## Deploy to heroku
+
+```
+git push heroku master
+```
+
+### Running the uberjar as a java app
+
+Add a web directive to run a suitable java command line to launch the application via the uberjar that Heroku builds from source.
+
+```
+web: java $JVM_OPTS -cp target/server.jar clojure.main -m game-scoreboard.handler $PORT
+```
+
+### Projects using lein-ring plugin
+```
+web: lein ring server-headless $PORT
+```
+
 ## License
 
 Copyright ©  FIXME
