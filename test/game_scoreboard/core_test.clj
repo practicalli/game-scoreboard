@@ -27,3 +27,29 @@
 
       (is (= (:status response) 200))
       (is (= (:result body) 3)))))
+
+
+;; REPL experiments
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; We can see how mocking in a test works
+;; by debugging the following code
+(let [response  (app (-> (mock/request :get "/game/random-score")))
+      body      (parse-body (:body response))
+      {:keys
+       [player-id
+        score]} (first body)]
+
+
+
+  ;; assertions
+  (is (= (:status response) 200))
+  #_(is (uuid? player-id))
+  (is (int? score))
+  )
+;; => true
+
+
+;; `uuid?` function does not return true if the #uuid tag literal is missing
+
+
