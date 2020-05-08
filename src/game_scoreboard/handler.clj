@@ -1,7 +1,8 @@
 (ns game-scoreboard.handler
   (:require [compojure.api.sweet :refer :all]
             [ring.util.http-response :refer :all]
-            [schema.core :as schema]))
+            [schema.core :as schema]
+            [ring.middleware.cors :refer [wrap-cors]]))
 
 ;; Schema types
 
@@ -104,7 +105,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (def app
-  (api
+  (->
+   (api
     {:swagger
      {:ui   "/"
       :spec "/swagger.json"
@@ -144,7 +146,14 @@
                   :return ScoreBoard
                   :summary "Generates a random score, adds it to the game board and returns the new game board"
                   (ok (swap! score-board conj (random-score))))
-             )))
+             ))
+   (wrap-cors :access-control-allow-origin [#".*"]
+              :access-control-allow-methods [:get :post])  ))
+
+
+
+
+
 
 
 ;; data model that came with the compojure-api template
